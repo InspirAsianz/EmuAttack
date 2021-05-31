@@ -1,0 +1,10 @@
+HighScore:0
+Coins:0
+HealthLevel:0
+EggLevel:0
+DashLevel:0
+CoinsLevel:0
+PowerupLevel:0
+FPS:true
+WASD:true
+Multiplayer:false
