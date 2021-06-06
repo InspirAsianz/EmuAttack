@@ -329,43 +329,43 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 	}
 	
 	private void readFile() {
-		String data = ""; // HighScore, Coins, Health, EggCooldown, Dash, CoinsPerKill, Powerup, ShowFPS, WASD, Multiplayer
-		HashMap<String, String> save = new HashMap<String, String>();
-		try {
-			File f = new File("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
-			Scanner read = new Scanner(f);
-			String[] line;
-			while (read.hasNextLine()) {
-				line = read.nextLine().split(":");
-				save.put(line[0], line[1]);
-			}
-			read.close();
-		} catch (Exception e){
-			e.printStackTrace();
-			System.exit(0);
-		}
-				
-		highScore = Integer.parseInt(save.getOrDefault("HighScore", "0"));
-		coins = Integer.parseInt(save.getOrDefault("Coins", "0"));
-		setLivesInfo(Integer.parseInt(save.getOrDefault("HealthLevel", "0")));
-		setEggCooldown(Integer.parseInt(save.getOrDefault("EggLevel", "0")));
-		setDashInfo(Integer.parseInt(save.getOrDefault("DashLevel", "0")));
-		setCoinsPerEnemy(Integer.parseInt(save.getOrDefault("CoinsLevel", "0")));
-		setWheatInfo(Integer.parseInt(save.getOrDefault("PowerupLevel", "0")));
-		showFPS = Boolean.parseBoolean(save.getOrDefault("FPS", "false"));
-		WASD  = Boolean.parseBoolean(save.getOrDefault("WASD", "true"));
-		IS_MULTIPLAYER = Boolean.parseBoolean(save.getOrDefault("Multiplayer", "false"));
+//		String data = ""; // HighScore, Coins, Health, EggCooldown, Dash, CoinsPerKill, Powerup, ShowFPS, WASD, Multiplayer
+//		HashMap<String, String> save = new HashMap<String, String>();
+//		try {
+//			File f = new File("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
+//			Scanner read = new Scanner(f);
+//			String[] line;
+//			while (read.hasNextLine()) {
+//				line = read.nextLine().split(":");
+//				save.put(line[0], line[1]);
+//			}
+//			read.close();
+//		} catch (Exception e){
+//			e.printStackTrace();
+//			System.exit(0);
+//		}
+//				
+//		highScore = Integer.parseInt(save.getOrDefault("HighScore", "0"));
+//		coins = Integer.parseInt(save.getOrDefault("Coins", "0"));
+//		setLivesInfo(Integer.parseInt(save.getOrDefault("HealthLevel", "0")));
+//		setEggCooldown(Integer.parseInt(save.getOrDefault("EggLevel", "0")));
+//		setDashInfo(Integer.parseInt(save.getOrDefault("DashLevel", "0")));
+//		setCoinsPerEnemy(Integer.parseInt(save.getOrDefault("CoinsLevel", "0")));
+//		setWheatInfo(Integer.parseInt(save.getOrDefault("PowerupLevel", "0")));
+//		showFPS = Boolean.parseBoolean(save.getOrDefault("FPS", "false"));
+//		WASD  = Boolean.parseBoolean(save.getOrDefault("WASD", "true"));
+//		IS_MULTIPLAYER = Boolean.parseBoolean(save.getOrDefault("Multiplayer", "false"));
 		
-//		highScore = prefs.getInt("HighScore", 0);
-//		coins = prefs.getInt("Coins", 0);
-//		setLivesInfo(prefs.getInt("HealthLevel", 0));
-//		setEggCooldown(prefs.getInt("EggLevel", 0));
-//		setDashInfo(prefs.getInt("DashLevel", 0));
-//		setCoinsPerEnemy(prefs.getInt("CoinsLevel", 0));
-//		setWheatInfo(prefs.getInt("PowerupLevel", 0));
-//		showFPS = prefs.getBoolean("FPS", false);
-//		WASD  = prefs.getBoolean("WASD", true);
-//		IS_MULTIPLAYER = prefs.getBoolean("Multiplayer", false);
+		highScore = prefs.getInt("HighScore", 0);
+		coins = prefs.getInt("Coins", 0);
+		setLivesInfo(prefs.getInt("HealthLevel", 0));
+		setEggCooldown(prefs.getInt("EggLevel", 0));
+		setDashInfo(prefs.getInt("DashLevel", 0));
+		setCoinsPerEnemy(prefs.getInt("CoinsLevel", 0));
+		setWheatInfo(prefs.getInt("PowerupLevel", 0));
+		showFPS = prefs.getBoolean("FPS", false);
+		WASD  = prefs.getBoolean("WASD", true);
+		IS_MULTIPLAYER = prefs.getBoolean("Multiplayer", false);
 	}
 	
 	private void setLivesInfo(int level) {
@@ -463,35 +463,35 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 	}
 
 	private void writeFile() {
-		try {
-			FileWriter f = new FileWriter("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
-			String out = "";
-			out += "HighScore:" + highScore;
-			out += "\nCoins:" + coins;
-			out += "\nHealthLevel:" + healthLevel;
-			out += "\nEggLevel:" + eggLevel;
-			out += "\nDashLevel:" + dashLevel;
-			out += "\nCoinsLevel:" + coinsLevel;
-			out += "\nPowerupLevel:" + powerupLevel;
-			out += "\nFPS:" + showFPS;
-			out += "\nWASD:" + WASD;
-			out += "\nMultiplayer:" + IS_MULTIPLAYER;
-			f.write(out);
-			f.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			FileWriter f = new FileWriter("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
+//			String out = "";
+//			out += "HighScore:" + highScore;
+//			out += "\nCoins:" + coins;
+//			out += "\nHealthLevel:" + healthLevel;
+//			out += "\nEggLevel:" + eggLevel;
+//			out += "\nDashLevel:" + dashLevel;
+//			out += "\nCoinsLevel:" + coinsLevel;
+//			out += "\nPowerupLevel:" + powerupLevel;
+//			out += "\nFPS:" + showFPS;
+//			out += "\nWASD:" + WASD;
+//			out += "\nMultiplayer:" + IS_MULTIPLAYER;
+//			f.write(out);
+//			f.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
-//		prefs.putInt("HighScore", highScore);
-//		prefs.putInt("Coins", coins);
-//		prefs.putInt("HealthLevel", healthLevel);
-//		prefs.putInt("EggLevel", eggLevel);
-//		prefs.putInt("DashLevel", dashLevel);
-//		prefs.putInt("CoinsLevel", coinsLevel);
-//		prefs.putInt("PowerupLevel", powerupLevel);
-//		prefs.putBoolean("FPS", showFPS);
-//		prefs.putBoolean("WASD", WASD);
-//		prefs.putBoolean("Multiplayer", IS_MULTIPLAYER);
+		prefs.putInt("HighScore", highScore);
+		prefs.putInt("Coins", coins);
+		prefs.putInt("HealthLevel", healthLevel);
+		prefs.putInt("EggLevel", eggLevel);
+		prefs.putInt("DashLevel", dashLevel);
+		prefs.putInt("CoinsLevel", coinsLevel);
+		prefs.putInt("PowerupLevel", powerupLevel);
+		prefs.putBoolean("FPS", showFPS);
+		prefs.putBoolean("WASD", WASD);
+		prefs.putBoolean("Multiplayer", IS_MULTIPLAYER);
 	}
 	
 	
