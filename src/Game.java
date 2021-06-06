@@ -81,6 +81,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 	private AllWheat wheats;
 	private Score score;
 	private FillableBar dashBar;
+	private FillableBar megaBar;
 	private AllText titleTexts;
 	private AllText upgradeTexts;
 	private AllText optionTexts;
@@ -116,7 +117,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 	
 	private boolean WASD;
 	
-	private static boolean hacking = false;
+	private static boolean hacking = true;
 	
 	/*
 	 * Preferences code references from https://www.vogella.com/tutorials/JavaPreferences/article.html
@@ -246,7 +247,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		smallFont = new Font("Courier", Font.PLAIN, 24);
 		costFont = new Font("Courier", Font.BOLD, 32);
 		purchaseFont = new Font("Courier", Font.BOLD, 48);
-		howToPlayFont = new Font("Courier", Font.PLAIN, 32);
+		howToPlayFont = new Font("Courier", Font.PLAIN, 28);
 		highScoreFont = new Font("Courier", Font.PLAIN, 32);
 		
 		try {
@@ -289,6 +290,8 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		score = new Score(smallFont);
 		dashBar = new FillableBar(375, HEIGHT-75, 200, 50, new Color(96, 175, 224), 
 				100, 100, "/dashicon.png", 0.2);
+		megaBar = new FillableBar(675, HEIGHT-75, 200, 50, new Color(217, 58, 50), 
+				0, 100, "/eggimage.png", 0.2);
 		titleTexts = new AllText();
 		upgradeTexts = new AllText();
 		optionTexts = new AllText();
@@ -326,43 +329,43 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 	}
 	
 	private void readFile() {
-//		String data = ""; // HighScore, Coins, Health, EggCooldown, Dash, CoinsPerKill, Powerup, ShowFPS, WASD, Multiplayer
-//		HashMap<String, String> save = new HashMap<String, String>();
-//		try {
-//			File f = new File("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
-//			Scanner read = new Scanner(f);
-//			String[] line;
-//			while (read.hasNextLine()) {
-//				line = read.nextLine().split(":");
-//				save.put(line[0], line[1]);
-//			}
-//			read.close();
-//		} catch (Exception e){
-//			e.printStackTrace();
-//			System.exit(0);
-//		}
-//				
-//		highScore = Integer.parseInt(save.getOrDefault("HighScore", "0"));
-//		coins = Integer.parseInt(save.getOrDefault("Coins", "0"));
-//		setLivesInfo(Integer.parseInt(save.getOrDefault("HealthLevel", "0")));
-//		setEggCooldown(Integer.parseInt(save.getOrDefault("EggLevel", "0")));
-//		setDashInfo(Integer.parseInt(save.getOrDefault("DashLevel", "0")));
-//		setCoinsPerEnemy(Integer.parseInt(save.getOrDefault("CoinsLevel", "0")));
-//		setWheatInfo(Integer.parseInt(save.getOrDefault("PowerupLevel", "0")));
-//		showFPS = Boolean.parseBoolean(save.getOrDefault("FPS", "false"));
-//		WASD  = Boolean.parseBoolean(save.getOrDefault("WASD", "true"));
-//		IS_MULTIPLAYER = Boolean.parseBoolean(save.getOrDefault("Multiplayer", "false"));
+		String data = ""; // HighScore, Coins, Health, EggCooldown, Dash, CoinsPerKill, Powerup, ShowFPS, WASD, Multiplayer
+		HashMap<String, String> save = new HashMap<String, String>();
+		try {
+			File f = new File("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
+			Scanner read = new Scanner(f);
+			String[] line;
+			while (read.hasNextLine()) {
+				line = read.nextLine().split(":");
+				save.put(line[0], line[1]);
+			}
+			read.close();
+		} catch (Exception e){
+			e.printStackTrace();
+			System.exit(0);
+		}
+				
+		highScore = Integer.parseInt(save.getOrDefault("HighScore", "0"));
+		coins = Integer.parseInt(save.getOrDefault("Coins", "0"));
+		setLivesInfo(Integer.parseInt(save.getOrDefault("HealthLevel", "0")));
+		setEggCooldown(Integer.parseInt(save.getOrDefault("EggLevel", "0")));
+		setDashInfo(Integer.parseInt(save.getOrDefault("DashLevel", "0")));
+		setCoinsPerEnemy(Integer.parseInt(save.getOrDefault("CoinsLevel", "0")));
+		setWheatInfo(Integer.parseInt(save.getOrDefault("PowerupLevel", "0")));
+		showFPS = Boolean.parseBoolean(save.getOrDefault("FPS", "false"));
+		WASD  = Boolean.parseBoolean(save.getOrDefault("WASD", "true"));
+		IS_MULTIPLAYER = Boolean.parseBoolean(save.getOrDefault("Multiplayer", "false"));
 		
-		highScore = prefs.getInt("HighScore", 0);
-		coins = prefs.getInt("Coins", 0);
-		setLivesInfo(prefs.getInt("HealthLevel", 0));
-		setEggCooldown(prefs.getInt("EggLevel", 0));
-		setDashInfo(prefs.getInt("DashLevel", 0));
-		setCoinsPerEnemy(prefs.getInt("CoinsLevel", 0));
-		setWheatInfo(prefs.getInt("PowerupLevel", 0));
-		showFPS = prefs.getBoolean("FPS", false);
-		WASD  = prefs.getBoolean("WASD", true);
-		IS_MULTIPLAYER = prefs.getBoolean("Multiplayer", false);
+//		highScore = prefs.getInt("HighScore", 0);
+//		coins = prefs.getInt("Coins", 0);
+//		setLivesInfo(prefs.getInt("HealthLevel", 0));
+//		setEggCooldown(prefs.getInt("EggLevel", 0));
+//		setDashInfo(prefs.getInt("DashLevel", 0));
+//		setCoinsPerEnemy(prefs.getInt("CoinsLevel", 0));
+//		setWheatInfo(prefs.getInt("PowerupLevel", 0));
+//		showFPS = prefs.getBoolean("FPS", false);
+//		WASD  = prefs.getBoolean("WASD", true);
+//		IS_MULTIPLAYER = prefs.getBoolean("Multiplayer", false);
 	}
 	
 	private void setLivesInfo(int level) {
@@ -460,35 +463,35 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 	}
 
 	private void writeFile() {
-//		try {
-//			FileWriter f = new FileWriter("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
-//			String out = "";
-//			out += "HighScore:" + highScore;
-//			out += "\nCoins:" + coins;
-//			out += "\nHealthLevel:" + healthLevel;
-//			out += "\nEggLevel:" + eggLevel;
-//			out += "\nDashLevel:" + dashLevel;
-//			out += "\nCoinsLevel:" + coinsLevel;
-//			out += "\nPowerupLevel:" + powerupLevel;
-//			out += "\nFPS:" + showFPS;
-//			out += "\nWASD:" + WASD;
-//			out += "\nMultiplayer:" + IS_MULTIPLAYER;
-//			f.write(out);
-//			f.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			FileWriter f = new FileWriter("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
+			String out = "";
+			out += "HighScore:" + highScore;
+			out += "\nCoins:" + coins;
+			out += "\nHealthLevel:" + healthLevel;
+			out += "\nEggLevel:" + eggLevel;
+			out += "\nDashLevel:" + dashLevel;
+			out += "\nCoinsLevel:" + coinsLevel;
+			out += "\nPowerupLevel:" + powerupLevel;
+			out += "\nFPS:" + showFPS;
+			out += "\nWASD:" + WASD;
+			out += "\nMultiplayer:" + IS_MULTIPLAYER;
+			f.write(out);
+			f.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		prefs.putInt("HighScore", highScore);
-		prefs.putInt("Coins", coins);
-		prefs.putInt("HealthLevel", healthLevel);
-		prefs.putInt("EggLevel", eggLevel);
-		prefs.putInt("DashLevel", dashLevel);
-		prefs.putInt("CoinsLevel", coinsLevel);
-		prefs.putInt("PowerupLevel", powerupLevel);
-		prefs.putBoolean("FPS", showFPS);
-		prefs.putBoolean("WASD", WASD);
-		prefs.putBoolean("Multiplayer", IS_MULTIPLAYER);
+//		prefs.putInt("HighScore", highScore);
+//		prefs.putInt("Coins", coins);
+//		prefs.putInt("HealthLevel", healthLevel);
+//		prefs.putInt("EggLevel", eggLevel);
+//		prefs.putInt("DashLevel", dashLevel);
+//		prefs.putInt("CoinsLevel", coinsLevel);
+//		prefs.putInt("PowerupLevel", powerupLevel);
+//		prefs.putBoolean("FPS", showFPS);
+//		prefs.putBoolean("WASD", WASD);
+//		prefs.putBoolean("Multiplayer", IS_MULTIPLAYER);
 	}
 	
 	
@@ -875,7 +878,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		graphToBack.setFont(bigFont);
 		graphToBack.setColor(Color.BLACK);
 		int w = graphToBack.getFontMetrics().stringWidth("HOW TO PLAY");
-		graphToBack.drawString("HOW TO PLAY", WIDTH/2 - w/2, HEIGHT/5);
+		graphToBack.drawString("HOW TO PLAY", WIDTH/2 - w/2, 75);
 		
 		graphToBack.setFont(howToPlayFont);
 		String text;
@@ -883,29 +886,39 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 			text = "Use WASD to move the emu around the screen."
 					+ "\nPress J to shoot eggs and kill the enemies."
 					+ "\nPress K to dash and move faster."
-					+ "\nThe amount of dash you have is indicated by the dash bar.\n"
+					+ "\nThe amount of dash you have is indicated by the dash bar."
+					+ "\nPress L to use your mega egg"
+					+ "\nIt needs to be charged, and can only be used once the mega egg bar is full."
+					+ "\nPress ESCAPE when in game to pause.\n"
 					+ "\nThere are enemies who will shoot bullets and randomly move around the screen."
-					+ "\nIf you get hit by a bullet, you will take damage, indicated by the hearts you have.\n"
+					+ "\nIf you get hit by a bullet, you will take damage."
+					+ "\nYour health is indicated by the hearts you have.\n"
 					+ "\nYou get 1 point per second you are alive, "
 					+ "\nand 10 points for every enemy you kill."
 					+ "\nYou get coins (depending on your coin upgrade) for every enemy you kill."
 					+ "\nWheat spawns randomly throughout the game, and colelcting the wheat will heal you."
-					+ "\nYou can buy upgrades in the UPGRADES tab on the title screen";
+					+ "\nYou can buy upgrades in the UPGRADES tab on the title screen"
+					+ "\n\nMade by Andrew Ma";
 		}
 		else {
 			text = "Use ARROW KEYS to move the emu around the screen."
 					+ "\nPress Z to shoot eggs and kill the enemies."
 					+ "\nPress X to dash and move faster."
-					+ "\nThe amount of dash you have is indicated by the dash bar.\n"
+					+ "\nThe amount of dash you have is indicated by the dash bar."
+					+ "\nPress C to use your mega egg"
+					+ "\nIt needs to be charged, and can only be used once the mega egg bar is full."
+					+ "\nPress ESCAPE when in game to pause.\n"
 					+ "\nThere are enemies who will shoot bullets and randomly move around the screen."
-					+ "\nIf you get hit by a bullet, you will take damage, indicated by the hearts you have.\n"
+					+ "\nIf you get hit by a bullet, you will take damage."
+					+ "\nYour health is indicated by the hearts you have.\n"
 					+ "\nYou get 1 point per second you are alive, "
 					+ "\nand 10 points for every enemy you kill."
 					+ "\nYou get coins (depending on your coin upgrade) for every enemy you kill."
 					+ "\nWheat spawns randomly throughout the game, and colelcting the wheat will heal you."
-					+ "\nYou can buy upgrades in the UPGRADES tab on the title screen";
+					+ "\nYou can buy upgrades in the UPGRADES tab on the title screen"
+					+ "\n\nMade by Andrew Ma";
 		}
-		drawStringNewlineCentered(graphToBack, text, 225);
+		drawStringNewlineCentered(graphToBack, text, 100);
 		
 		graphToBack.setFont(smallFont);
 		w = graphToBack.getFontMetrics().stringWidth("Press ESCAPE to go back");
@@ -954,7 +967,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 				break;
 			case Controls:
 				t = optionTexts.getText("Controls");
-				description = "Switches the controls between WASD + JK and ARROW KEYS\n+ ZX.";
+				description = "Switches the controls between WASD + JKL and ARROW KEYS\n+ ZXC.";
 				graphToBack.fillRoundRect(t.getX() - 5, t.getY() - t.getHeight()/2 - 5,
 						t.getWidth() + 10, t.getHeight()/2 + 12, 10, 10);
 				if (WASD) {
@@ -1034,7 +1047,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		if (keys.get("ESCAPE")) {
 			currentScene = Scene.TitleScene;
 			currentOptionSelection = OptionSelection.ShowFPS;
-			upgradeTexts.clearFading();
+			optionTexts.clearFading();
 			keys.replace("ESCAPE", false);
 		}
 	}
@@ -1094,13 +1107,11 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		graphToBack.drawImage(river, (int)(WIDTH * 0.55), 0, river.getWidth(null), 
 				river.getHeight(null), null);
 		
-		if (!paused) {
-			dashBar.draw(graphToBack);
-			
+		if (!paused) {			
 			checkInputsGame();
 			
-			updateEmuGame(graphToBack);
-					
+			updateBars(graphToBack);
+								
 			updateProjectilesGame(graphToBack);
 			
 			updateHumansGame(graphToBack);
@@ -1108,14 +1119,20 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 			updateUIGame(graphToBack);
 		
 			updateWheatGame(graphToBack);
+			
+			updateEmuGame(graphToBack);
 		}
 		else {
 			if (keys.get("ESCAPE")) {
 				paused = false;
 				keys.replace("ESCAPE", false);
 			}
-			graphToBack.setColor(new Color(130, 130, 130, 100));
+			graphToBack.setColor(new Color(130, 130, 130));
 			graphToBack.fillRect(0, 0, WIDTH, HEIGHT);
+			
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.setFont(mediumFont);
+			drawStringNewlineCentered(graphToBack, "Game paused, press ESC to resume", HEIGHT/2 - 50);
 		}
 	}
 	
@@ -1171,11 +1188,12 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		}
 		
 		// MEGA EPIC OVERPOWERED EGG (CHARGED ATTACK)
-//		if (keys.get("SUPER")) {
-//			Egg e = new Egg(emu.getX() + emu.getWidth()/2, emu.getY() - emu.getHeight()/2, true);
-//			projectiles.add(e);
-//			keys.replace("SUPER", false);
-//		}
+		if (keys.get("SUPER") && megaBar.isFull()) {
+			Egg e = new Egg(emu.getX() + emu.getWidth()/2, emu.getY() - emu.getHeight()/2, true);
+			projectiles.add(e);
+			keys.replace("SUPER", false);
+			megaBar.setFilled(0);
+		}
 		
 		// Pause
 		if (keys.get("ESCAPE")) {
@@ -1184,25 +1202,34 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		}
 	}
 	
+	private void updateBars(Graphics graphToBack) {
+		dashBar.draw(graphToBack);
+		megaBar.draw(graphToBack);
+		megaBar.increase(0.02);
+	}
+	
 	private void updateEmuGame(Graphics graphToBack) {
 		emu.draw(graphToBack);
 		boolean hit = emu.checkCollisionsProjectiles(projectiles.getArray());
 		if (hit) {
 			lives.loseLife();
 			if (lives.getLives() == 0) {
-				if (!IS_MULTIPLAYER) coins += enemiesKilled * COINS_PER_ENEMY;
-				currentScene = Scene.EndScene;
-				if (score.getScore() > highScore) {
-					newHighScore = true;
-					highScore = score.getScore();
-					writeFile();
+				if (!IS_MULTIPLAYER) {
+					coins += enemiesKilled * COINS_PER_ENEMY;
+					if (score.getScore() > highScore) {
+						newHighScore = true;
+						highScore = score.getScore();
+						writeFile();
+					}
 				}
+				currentScene = Scene.EndScene;
 			}
 		}
 		boolean wheat = emu.checkCollisionsWheat(wheats.getArray());
 		if (wheat) {
 			lives.gainLives(WHEAT_LIVES_GAINED);
 			dashBar.increase(10);
+			megaBar.increase(25);
 		}
 	}
 

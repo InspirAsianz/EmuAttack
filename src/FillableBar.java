@@ -70,6 +70,10 @@ public class FillableBar extends GameObject {
 		filled = max;
 	}
 	
+	public void setFilled(int i) {
+		filled = i;
+	}
+	
 	public void draw(Graphics graphToBack) {
 		
 		graphToBack.setColor(color);
