@@ -134,11 +134,6 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		OptionScene,
 		GameScene,
 		EndScene;
-	    private static Scene[] vals = values();
-	    public Scene next()
-	    {
-	        return vals[(this.ordinal()+1) % vals.length];
-	    }
 	};
 	private Scene currentScene;
 	
@@ -329,7 +324,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 	}
 	
 	private void readFile() {
-//		String data = ""; // HighScore, Coins, Health, EggCooldown, Dash, CoinsPerKill, Powerup, ShowFPS, WASD, Multiplayer
+		// HighScore, Coins, Health, EggCooldown, Dash, CoinsPerKill, Powerup, ShowFPS, WASD, Multiplayer
 //		HashMap<String, String> save = new HashMap<String, String>();
 //		try {
 //			File f = new File("C:\\Users\\andre\\eclipse-workspace\\EmuAttack\\src\\gamedata.txt");
@@ -1222,6 +1217,9 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 						writeFile();
 					}
 				}
+				else {
+					readFile();
+				}
 				currentScene = Scene.EndScene;
 			}
 		}
@@ -1328,6 +1326,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		
 		if (keys.get("ESCAPE")) {
 			currentScene = Scene.TitleScene;
+			newHighScore = false;
 			keys.replace("ESCAPE", false);
 		}
 	}
@@ -1339,6 +1338,7 @@ public class Game extends JPanel implements KeyListener, MouseListener {
 		score.setScore(0);
 		setLivesInfo(healthLevel);
 		dashBar.reset();
+		megaBar.setFilled(0);
 		enemiesKilled = 0;
 		humans.reset();
 		projectiles.reset();

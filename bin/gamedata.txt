@@ -1,10 +1,10 @@
-HighScore:0
-Coins:0
-HealthLevel:3
-EggLevel:3
-DashLevel:2
-CoinsLevel:0
+HighScore:243
+Coins:40
+HealthLevel:1
+EggLevel:0
+DashLevel:0
+CoinsLevel:1
 PowerupLevel:0
 FPS:false
 WASD:true
-Multiplayer:true
+Multiplayer:false
